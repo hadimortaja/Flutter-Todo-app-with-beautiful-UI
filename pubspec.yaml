@@ -1,9 +1,7 @@
 name: todo_app
 description: A new Flutter project.
 
-
-publish_to: 'none'
-
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -22,10 +20,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
-
 flutter:
-
-
   uses-material-design: true
   assets:
     - assets/images/
