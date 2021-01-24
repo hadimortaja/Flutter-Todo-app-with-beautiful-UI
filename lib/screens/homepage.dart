@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/DB/database_helper.dart';
 import 'package:todo_app/screens/taskpage.dart';
 import 'package:todo_app/screens/widgets.dart';
 
@@ -8,6 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DatabaseHelper _dbHelper = DatabaseHelper();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,22 +31,35 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Expanded(
-                    child: ScrollConfiguration(
-                      behavior: NoGlowBehaviour(),
-                                          child: ListView(
-                        children: [
-                          TaskCardWidget(
-                            title: "Task 1",
-                            desc:
-                                "Hello User! Welcome to Todo app, this is a default task that you can edit or delete to start using the app.",
+                    child: FutureBuilder(
+                      initialData: [],
+                      future: _dbHelper.getTasks(),
+                      builder: (context,snapshot){
+                        return ScrollConfiguration(
+                          behavior: NoGlowBehaviour(),
+                                                  child: ListView.builder(
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context,index){
+                              return TaskCardWidget(
+                                title: snapshot.data[index].title,
+                              );
+                            },
                           ),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                        ],
-                      ),
+                        );
+                      },
+                      //children: [
+                        // TaskCardWidget(
+                        //   title: "Task 1",
+                        //   desc:
+                        //       "Hello User! Welcome to Todo app, this is a default task that you can edit or delete to start using the app.",
+                        // ),
+                        // TaskCardWidget(),
+                        // TaskCardWidget(),
+                        // TaskCardWidget(),
+                        // TaskCardWidget(),
+                        // TaskCardWidget(),
+                    
+                      //],
                     ),
                   ),
                 ],
@@ -55,7 +70,11 @@ class _HomePageState extends State<HomePage> {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Taskpage()));
+                        context, MaterialPageRoute(builder: (_) => Taskpage())).then((value){
+                          setState(() {
+                            
+                          });
+                        });
                   },
                   child: Container(
                     width: 50,
@@ -80,7 +99,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  
 }
-
-

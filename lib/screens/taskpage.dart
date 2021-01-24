@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/DB/database_helper.dart';
+import 'package:todo_app/models/task.dart';
 import 'package:todo_app/screens/widgets.dart';
 
 class Taskpage extends StatefulWidget {
@@ -18,7 +20,7 @@ class _TaskpageState extends State<Taskpage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 24,bottom: 6),
+                    padding: const EdgeInsets.only(top: 24, bottom: 6),
                     child: Row(
                       children: [
                         InkWell(
@@ -28,13 +30,24 @@ class _TaskpageState extends State<Taskpage> {
                           child: Padding(
                             padding: const EdgeInsets.all(24),
                             child: Image(
-                              image:
-                                  AssetImage("assets/images/back_arrow_icon.png"),
+                              image: AssetImage(
+                                  "assets/images/back_arrow_icon.png"),
                             ),
                           ),
                         ),
                         Expanded(
                           child: TextField(
+                            onSubmitted: (value) async {
+                              print("Field Value :$value");
+                              if (value != "") {
+                                DatabaseHelper _dbHelper = DatabaseHelper();
+                                Task _newTask = Task(
+                                  title: value,
+                                );
+                                await _dbHelper.insertTask(_newTask);
+                                print("New Task Has been inserted");
+                              }
+                            },
                             decoration: InputDecoration(
                                 hintText: "Enter task title",
                                 border: InputBorder.none),
@@ -48,7 +61,7 @@ class _TaskpageState extends State<Taskpage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom:12.0),
+                    padding: const EdgeInsets.only(bottom: 12.0),
                     child: TextField(
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(horizontal: 24),
@@ -56,40 +69,58 @@ class _TaskpageState extends State<Taskpage> {
                           border: InputBorder.none),
                     ),
                   ),
-                  TodoWidget(text: "create new repository",isDone:true ,),
-                  TodoWidget(isDone: true,),
-                  TodoWidget(text: "create new repository",isDone:true ,),
-                  TodoWidget(isDone: false,),
-                  TodoWidget(text: "create new repository",isDone:true ,),
-                  TodoWidget(isDone: false,),
-                  
-                  
+                  TodoWidget(
+                    text: "create new repository",
+                    isDone: true,
+                  ),
+                  TodoWidget(
+                    isDone: true,
+                  ),
+                  TodoWidget(
+                    text: "create new repository",
+                    isDone: true,
+                  ),
+                  TodoWidget(
+                    isDone: false,
+                  ),
+                  TodoWidget(
+                    text: "create new repository",
+                    isDone: true,
+                  ),
+                  TodoWidget(
+                    isDone: false,
+                  ),
                 ],
               ),
               Positioned(
-                  bottom: 24.0,
-                  right: 24.0,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => Taskpage()));
-                    },
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Color(0xFFFE3577)),
+                bottom: 24.0,
+                right: 24.0,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => Taskpage()));
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Color(0xFFFE3577)),
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Tabed");
+                      },
                       child: Image(
                         image: AssetImage("assets/images/delete_icon.png"),
                       ),
                     ),
                   ),
-                )
+                ),
+              )
             ],
           ),
         ),
-      ),  
+      ),
     );
   }
 }
