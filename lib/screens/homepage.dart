@@ -34,31 +34,39 @@ class _HomePageState extends State<HomePage> {
                     child: FutureBuilder(
                       initialData: [],
                       future: _dbHelper.getTasks(),
-                      builder: (context,snapshot){
+                      builder: (context, snapshot) {
                         return ScrollConfiguration(
                           behavior: NoGlowBehaviour(),
-                                                  child: ListView.builder(
+                          child: ListView.builder(
                             itemCount: snapshot.data.length,
-                            itemBuilder: (context,index){
-                              return TaskCardWidget(
-                                title: snapshot.data[index].title,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => Taskpage(task: snapshot.data[index],)));
+                                },
+                                child: TaskCardWidget(
+                                  title: snapshot.data[index].title,
+                                ),
                               );
                             },
                           ),
                         );
                       },
                       //children: [
-                        // TaskCardWidget(
-                        //   title: "Task 1",
-                        //   desc:
-                        //       "Hello User! Welcome to Todo app, this is a default task that you can edit or delete to start using the app.",
-                        // ),
-                        // TaskCardWidget(),
-                        // TaskCardWidget(),
-                        // TaskCardWidget(),
-                        // TaskCardWidget(),
-                        // TaskCardWidget(),
-                    
+                      // TaskCardWidget(
+                      //   title: "Task 1",
+                      //   desc:
+                      //       "Hello User! Welcome to Todo app, this is a default task that you can edit or delete to start using the app.",
+                      // ),
+                      // TaskCardWidget(),
+                      // TaskCardWidget(),
+                      // TaskCardWidget(),
+                      // TaskCardWidget(),
+                      // TaskCardWidget(),
+
                       //],
                     ),
                   ),
@@ -69,12 +77,11 @@ class _HomePageState extends State<HomePage> {
                 right: 0.0,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Taskpage())).then((value){
-                          setState(() {
-                            
-                          });
-                        });
+                    Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => Taskpage(task: null,)))
+                        .then((value) {
+                      setState(() {});
+                    });
                   },
                   child: Container(
                     width: 50,
