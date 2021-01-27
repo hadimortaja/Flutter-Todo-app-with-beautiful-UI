@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TaskCardWidget extends StatelessWidget {
   final String title;
@@ -13,7 +14,8 @@ class TaskCardWidget extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
+        color:Get.isDarkMode? Colors.grey[700]:Colors.white,
+        
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +23,7 @@ class TaskCardWidget extends StatelessWidget {
           Text(
             title ?? "(Unnamed Task)",
             style: TextStyle(
-                color: Color(0xFF211551),
+                color: Get.isDarkMode?Colors.white:Color(0xFF211551),
                 fontSize: 22,
                 fontWeight: FontWeight.bold),
           ),
@@ -30,7 +32,7 @@ class TaskCardWidget extends StatelessWidget {
             child: Text(
               desc ?? "No Description Added",
               style: TextStyle(
-                  fontSize: 16, color: Color(0xFF86829D), height: 1.5),
+                  fontSize: 16, color: Get.isDarkMode?Colors.white:Color(0xFF86829D), height: 1.5),
             ),
           )
         ],
@@ -71,9 +73,10 @@ class TodoWidget extends StatelessWidget {
                 decoration: isDone==true?TextDecoration.lineThrough:TextDecoration.none,
                   fontWeight:isDone?FontWeight.bold: FontWeight.w500,
                   fontSize: 16,
-                  color: isDone?Color(0xFF211551):Color(0xFF86829D)),
+                  color: 
+                  Get.isDarkMode? Colors.white:Colors.grey,)),
             ),
-          ),
+          
         ],
       ),
     );

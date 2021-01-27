@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_app/DB/database_helper.dart';
 import 'package:todo_app/animation/fadeanimation.dart';
 import 'package:todo_app/models/task.dart';
@@ -67,10 +68,7 @@ class _TaskpageState extends State<Taskpage> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(24),
-                            child: Image(
-                              image: AssetImage(
-                                  "assets/images/back_arrow_icon.png"),
-                            ),
+                            child: Icon(Icons.arrow_back,color: Get.isDarkMode? Colors.white:Color(0xFF211551))
                           ),
                         ),
                         Expanded(
@@ -107,7 +105,7 @@ class _TaskpageState extends State<Taskpage> {
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF211551)),
+                                color: Get.isDarkMode? Colors.white:Color(0xFF211551)),
                           ),
                         )
                       ],
@@ -158,7 +156,6 @@ class _TaskpageState extends State<Taskpage> {
                                         snapshot.data[index].id, 0);
                                   }
                                   setState(() {});
-                                  // print("Todo Done: ${snapshot.data[index].isDone}");
                                 },
                                 child: FadeAnimation(
                                   1.2,

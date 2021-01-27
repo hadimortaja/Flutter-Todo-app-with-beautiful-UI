@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_app/DB/database_helper.dart';
 import 'package:todo_app/animation/fadeanimation.dart';
 import 'package:todo_app/screens/taskpage.dart';
 import 'package:todo_app/screens/widgets.dart';
+import 'package:todo_app/theme_service.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,9 +14,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DatabaseHelper _dbHelper = DatabaseHelper();
+  bool theme = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -25,11 +30,30 @@ class _HomePageState extends State<HomePage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 32, top: 32),
-                    child: Image(
-                      image: AssetImage('assets/images/logo.png'),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 32, top: 32),
+                        child: Image(
+                          width: 60,
+                         // height: 100,
+                          image: AssetImage('assets/images/logo.png',),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: 
+                          ThemeService().switchTheme,
+                         
+                        
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 40),
+                          child: Get.isDarkMode
+                              ? Image.asset("assets/images/sun.png")
+                              : Image.asset("assets/images/moon.png"),
+                        ),
+                      )
+                    ],
                   ),
                   Expanded(
                     child: FutureBuilder(
@@ -64,19 +88,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      //children: [
-                      // TaskCardWidget(
-                      //   title: "Task 1",
-                      //   desc:
-                      //       "Hello User! Welcome to Todo app, this is a default task that you can edit or delete to start using the app.",
-                      // ),
-                      // TaskCardWidget(),
-                      // TaskCardWidget(),
-                      // TaskCardWidget(),
-                      // TaskCardWidget(),
-                      // TaskCardWidget(),
-
-                      //],
                     ),
                   ),
                 ],
@@ -113,7 +124,6 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          color: Color(0xFFF6F6F6),
         ),
       ),
     );

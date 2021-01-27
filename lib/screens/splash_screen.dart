@@ -7,10 +7,9 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(
-    Duration(seconds: 3),
-     () =>
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (BuildContext context) => HomePage())));
+        Duration(seconds: 4),
+        () => Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => HomePage())));
     return Scaffold(
       body: Center(
         child: Container(
@@ -20,7 +19,11 @@ class SplashScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 80),
-                child: Image.asset("assets/images/logo.png",width: 80,height: 100,),
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  width: 80,
+                  height: 100,
+                ),
               ),
               Text(
                 "Todo !",
