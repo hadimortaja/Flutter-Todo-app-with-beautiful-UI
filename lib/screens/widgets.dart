@@ -64,12 +64,15 @@ class TodoWidget extends StatelessWidget {
           SizedBox(
             width: 5,
           ),
-          Text(
-            text ?? "Unnamed Todo",
-            style: TextStyle(
-                fontWeight:isDone?FontWeight.bold: FontWeight.w500,
-                fontSize: 16,
-                color: isDone?Color(0xFF211551):Color(0xFF86829D)),
+          Flexible(
+                      child: Text(
+              text ?? "Unnamed Todo",
+              style: TextStyle(
+                decoration: isDone==true?TextDecoration.lineThrough:TextDecoration.none,
+                  fontWeight:isDone?FontWeight.bold: FontWeight.w500,
+                  fontSize: 16,
+                  color: isDone?Color(0xFF211551):Color(0xFF86829D)),
+            ),
           ),
         ],
       ),

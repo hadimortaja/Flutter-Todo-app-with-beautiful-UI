@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/DB/database_helper.dart';
+import 'package:todo_app/animation/fadeanimation.dart';
 import 'package:todo_app/screens/taskpage.dart';
 import 'package:todo_app/screens/widgets.dart';
 
@@ -45,10 +46,18 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => Taskpage(task: snapshot.data[index],)));
+                                          builder: (_) => Taskpage(
+                                                task: snapshot.data[index],
+                                              ))).then((value) {
+                                    setState(() {});
+                                  });
                                 },
-                                child: TaskCardWidget(
-                                  title: snapshot.data[index].title,
+                                child: FadeAnimation(
+                                  1.2,
+                                  TaskCardWidget(
+                                    title: snapshot.data[index].title,
+                                    desc: snapshot.data[index].description,
+                                  ),
                                 ),
                               );
                             },
@@ -77,9 +86,12 @@ class _HomePageState extends State<HomePage> {
                 right: 0.0,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => Taskpage(task: null,)))
-                        .then((value) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => Taskpage(
+                                  task: null,
+                                ))).then((value) {
                       setState(() {});
                     });
                   },

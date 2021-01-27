@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/animation/fadeanimation.dart';
 import 'package:todo_app/screens/homepage.dart';
+import 'package:todo_app/screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +19,7 @@ textTheme: GoogleFonts.nunitoSansTextTheme(
 )
 
       ),
-      home: HomePage()
+      home: FadeAnimation(1.2,SplashScreen())
     );
   }
 }
