@@ -6,7 +6,6 @@ import 'package:todo_app/screens/taskpage.dart';
 import 'package:todo_app/screens/widgets.dart';
 import 'package:todo_app/theme_service.dart';
 
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -36,16 +35,15 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         margin: EdgeInsets.only(bottom: 32, top: 32),
                         child: Image(
-                          width: 60,
-                         // height: 100,
-                          image: AssetImage('assets/images/logo.png',),
+                          width: 50,
+                          // height: 100,
+                          image: AssetImage(
+                            'assets/images/logo.png',
+                          ),
                         ),
                       ),
                       GestureDetector(
-                        onTap: 
-                          ThemeService().switchTheme,
-                         
-                        
+                        onTap: ThemeService().switchTheme,
                         child: Container(
                           margin: EdgeInsets.only(bottom: 40),
                           child: Get.isDarkMode

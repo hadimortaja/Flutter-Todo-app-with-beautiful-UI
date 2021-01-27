@@ -18,7 +18,7 @@ class _TaskpageState extends State<Taskpage> {
   int _taskId = 0;
   String _taskTitle = "";
   String _taskDescripton = "";
-  String _todoText = "";
+  //String _todoText = "";
 
   FocusNode _titleFocus;
   FocusNode _descriptionFocus;
@@ -58,8 +58,10 @@ class _TaskpageState extends State<Taskpage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  
                   Padding(
                     padding: const EdgeInsets.only(top: 24, bottom: 6),
+                    
                     child: Row(
                       children: [
                         InkWell(
@@ -73,6 +75,7 @@ class _TaskpageState extends State<Taskpage> {
                         ),
                         Expanded(
                           child: TextField(
+                            
                             focusNode: _titleFocus,
                             onSubmitted: (value) async {
                               print("Field Value :$value");

@@ -1,4 +1,4 @@
-package com.h.mortaja.todo_app.todo_app
+package com.h.mortaja.todoapp
 
 import io.flutter.embedding.android.FlutterActivity
 
